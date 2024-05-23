@@ -5,9 +5,11 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObraShalom.Interface", "ObraShalom.Interface.csproj", "{8DE3E3C3-1EF0-4F7D-B8B0-90B94AC08A83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObraShalom.Data", "..\ObraShalom.Data\ObraShalom.Data.csproj", "{8653312E-C023-4552-BC78-F2957160FF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObraShalom.Data", "..\ObraShalom.Data\ObraShalom.Data.csproj", "{8653312E-C023-4552-BC78-F2957160FF98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObraShalom.Service", "..\ObraShalom.Service\ObraShalom.Service.csproj", "{1E424F7B-8D80-4A42-8F97-D612ED419DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObraShalom.Service", "..\ObraShalom.Service\ObraShalom.Service.csproj", "{1E424F7B-8D80-4A42-8F97-D612ED419DD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObraShalom.Domain", "..\ObraShalom.Domain\ObraShalom.Domain.csproj", "{35F61C9D-02BC-4664-B7BC-84AC740E1430}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1E424F7B-8D80-4A42-8F97-D612ED419DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E424F7B-8D80-4A42-8F97-D612ED419DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E424F7B-8D80-4A42-8F97-D612ED419DD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F61C9D-02BC-4664-B7BC-84AC740E1430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F61C9D-02BC-4664-B7BC-84AC740E1430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F61C9D-02BC-4664-B7BC-84AC740E1430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F61C9D-02BC-4664-B7BC-84AC740E1430}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,9 @@
-using backend.Data;
-using backend.Interfaces;
-using backend.Models.Common;
 using backend.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MySqlConnector;
+using MySql.Data.MySqlClient;
+using ObraShalom.Domain.Interfaces;
+using ObraShalom.Domain.Models.Common;
 using System.Data;
 using System.Text;
 
