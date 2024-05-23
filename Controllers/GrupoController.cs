@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ObraShalom.Domain.Entities;
+using ObraShalom.Service.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,13 +8,16 @@ namespace ObraShalom.Interface.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GrupoOracionController : ControllerBase
+    public class GrupoController : ControllerBase
     {
+        private readonly IGrupoService _grupoService;
+        public GrupoController(IGrupoService grupoService) => _grupoService = grupoService;
+
         // GET: api/<GrupoOracionController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<GrupoEntity>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _grupoService.ObtenerGrupos();
         }
 
         // GET api/<GrupoOracionController>/5

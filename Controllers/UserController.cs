@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ObraShalom.Domain.Interfaces;
 using ObraShalom.Domain.Models.Request;
+using ObraShalom.Service.Interfaces;
 
 namespace backend.Controllers
 {
@@ -8,16 +8,14 @@ namespace backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UserController(IUserRepository userRepository)
-        {
-            this._userRepository = userRepository;
-        }
+        public UserController(IUserService userService) => _userService = userService;
+
         [HttpPost("Login")]
         public IActionResult AuthLogin(AuthRequest auth)
         {
-            var resp = _userRepository.Auth(auth);
+            var resp = _userService.Auth(auth);
             return Ok(resp);
         }
     }
