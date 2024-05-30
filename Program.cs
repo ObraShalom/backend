@@ -1,8 +1,8 @@
-using backend.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 using ObraShalom.Data.Interfaces;
+using ObraShalom.Data.Repositories;
 using ObraShalom.Domain.Interfaces;
 using ObraShalom.Domain.Models.Common;
 using ObraShalom.Service;
@@ -26,10 +26,17 @@ builder.Services.AddScoped<IDbConnection>((sp) => new MySqlConnection(connString
 //Respositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGrupoRepository, GrupoRepository>();
+builder.Services.AddScoped<IObraRepository, ObraRepository>();
+builder.Services.AddScoped<IAsistenciaRepository, AsistenciaRepository>();
+builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+
 
 //Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IGrupoService, GrupoService>();
+builder.Services.AddScoped<IObraService, ObraService>();
+builder.Services.AddScoped<IAsistenciaService, AsistenciaService>();
+builder.Services.AddScoped<IEventoService, EventoService>();
 
 //jwt
 var appSettingSection = builder.Configuration.GetSection("AppSettings");
