@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ObraShalom.Domain\ObraShalom.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="ObraShalom.Domain.Tools"/>
+    <Using Include="Microsoft.Extensions.Options"/>
+    <Using Include="Microsoft.IdentityModel.Tokens"/>
+    <Using Include="ObraShalom.Domain.Models.Common"/>
+    <Using Include="System.Data"/>
+    <Using Include="Dapper"/>
+    <Using Include="System.IdentityModel.Tokens.Jwt"/>
+    <Using Include="System.Security.Claims"/>
+    <Using Include="System.Text"/>
+    <Using Include="ObraShalom.Domain.Models.Response"/>
+    <Using Include="ObraShalom.Domain.Models.Request"/>
+    <Using Include="ObraShalom.Domain.Models"/>
+    <Using Include="ObraShalom.Domain.Interfaces"/>
+  </ItemGroup>
+
+</Project>
