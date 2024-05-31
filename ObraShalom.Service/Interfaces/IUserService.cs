@@ -1,4 +1,5 @@
-﻿using ObraShalom.Domain.Models.Request;
+﻿using ObraShalom.Domain.Entities;
+using ObraShalom.Domain.Models.Request;
 using ObraShalom.Domain.Models.Response;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,7 @@ namespace ObraShalom.Service.Interfaces
     public interface IUserService
     {
         UserReponse Auth(AuthRequest auth);
+        Task CrearUsuario(UserEntity user, string token);
+        Task<IEnumerable<UserEntity>> ListarUsuarios();
     }
 }
