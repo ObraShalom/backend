@@ -20,4 +20,11 @@
     <ProjectReference Include="..\ObraShalom.Service\ObraShalom.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Microsoft.AspNetCore.Authorization"/>
+    <Using Include="Microsoft.AspNetCore.Mvc"/>
+    <Using Include="ObraShalom.Domain.Entities"/>
+    <Using Include="ObraShalom.Service.Interfaces"/>
+  </ItemGroup>
+
 </Project>

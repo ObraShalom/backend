@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ObraShalom.Domain.Models.Request;
-using ObraShalom.Service.Interfaces;
+﻿using ObraShalom.Domain.Models.Request;
 
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController(IUserService userService) : ControllerBase
     {
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService) => _userService = userService;
+        private readonly IUserService _userService = userService;
 
         [HttpPost("Login")]
         public IActionResult AuthLogin(AuthRequest auth)
