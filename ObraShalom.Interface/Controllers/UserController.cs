@@ -30,9 +30,10 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserEntity>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _userService.ListarUsuarios();
+            var result = await _userService.ListarUsuarios();
+            return Ok(result);
         }
     }
 }
