@@ -30,6 +30,10 @@ CREATE TABLE `asistencia` (
   `numcomprometidos` int DEFAULT NULL,
   `idgrupo` int DEFAULT NULL,
   `annio` int DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `grupo` FOREIGN KEY (`id`) REFERENCES `grupo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -41,7 +45,7 @@ CREATE TABLE `asistencia` (
 
 LOCK TABLES `asistencia` WRITE;
 /*!40000 ALTER TABLE `asistencia` DISABLE KEYS */;
-INSERT INTO `asistencia` VALUES (1,1,10,1,NULL);
+INSERT INTO `asistencia` VALUES (1,1,10,1,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `asistencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,6 +63,10 @@ CREATE TABLE `evento` (
   `numpersonas` int DEFAULT NULL,
   `idobra` int DEFAULT NULL,
   `idtipo` int DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   KEY `ibobra_idx` (`idobra`),
   KEY `idtipo` (`idtipo`),
   CONSTRAINT `ibobra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
@@ -72,7 +80,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` VALUES (1,'Seminario 1','2024-12-10 12:00:00',10,1,1),(2,'Evangelizacion','2024-12-20 12:00:00',1,2,2);
+INSERT INTO `evento` VALUES (1,'Seminario 1','2024-12-10 12:00:00',10,1,1,NULL,NULL,NULL,NULL),(2,'Evangelizacion','2024-12-20 12:00:00',1,2,2,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,6 +98,10 @@ CREATE TABLE `grupo` (
   `idobra` int NOT NULL,
   `idtipogrupo` int NOT NULL,
   `activo` bit(1) DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idobra_idx` (`idobra`),
   KEY `idtipogrupo_idx` (`idtipogrupo`),
@@ -104,7 +116,7 @@ CREATE TABLE `grupo` (
 
 LOCK TABLES `grupo` WRITE;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-INSERT INTO `grupo` VALUES (1,'Test',10,1,1,_binary ''),(2,'Test 2',11,1,1,_binary ''),(3,'Obra 3',12,2,2,_binary '');
+INSERT INTO `grupo` VALUES (1,'Test',10,1,1,_binary '',NULL,NULL,NULL,NULL),(2,'Test 2',11,1,1,_binary '',NULL,NULL,NULL,NULL),(3,'Obra 3',12,2,2,_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,6 +131,10 @@ CREATE TABLE `obra` (
   `id` int NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `activo` bit(1) DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -129,7 +145,7 @@ CREATE TABLE `obra` (
 
 LOCK TABLES `obra` WRITE;
 /*!40000 ALTER TABLE `obra` DISABLE KEYS */;
-INSERT INTO `obra` VALUES (1,'Bogota',_binary ''),(2,'Panama',_binary '');
+INSERT INTO `obra` VALUES (1,'Bogota',_binary '',NULL,NULL,NULL,NULL),(2,'Panama',_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,6 +159,10 @@ DROP TABLE IF EXISTS `tipoevento`;
 CREATE TABLE `tipoevento` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -153,7 +173,7 @@ CREATE TABLE `tipoevento` (
 
 LOCK TABLES `tipoevento` WRITE;
 /*!40000 ALTER TABLE `tipoevento` DISABLE KEYS */;
-INSERT INTO `tipoevento` VALUES (1,'Seminario'),(2,'Evangelizacion');
+INSERT INTO `tipoevento` VALUES (1,'Seminario',NULL,NULL,NULL,NULL),(2,'Evangelizacion',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tipoevento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,6 +187,10 @@ DROP TABLE IF EXISTS `tipogrupo`;
 CREATE TABLE `tipogrupo` (
   `id` int NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -177,24 +201,28 @@ CREATE TABLE `tipogrupo` (
 
 LOCK TABLES `tipogrupo` WRITE;
 /*!40000 ALTER TABLE `tipogrupo` DISABLE KEYS */;
-INSERT INTO `tipogrupo` VALUES (1,'Jovenes'),(2,'Adultos'),(3,'Abierto');
+INSERT INTO `tipogrupo` VALUES (1,'Jovenes',NULL,NULL,NULL,NULL),(2,'Adultos',NULL,NULL,NULL,NULL),(3,'Abierto',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tipogrupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `users`
+-- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `usuario` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `Username` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Password` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `IdRol` int NOT NULL,
   `idobra` int DEFAULT NULL,
+  `usucre` varchar(45) DEFAULT NULL,
+  `usumod` varchar(45) DEFAULT NULL,
+  `fechacre` datetime DEFAULT NULL,
+  `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE,
   KEY `idobra_idx` (`idobra`),
   CONSTRAINT `obra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`)
@@ -202,13 +230,13 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `usuario`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Tomas','tcampo','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,1),(2,'Sandra','san','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,2);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Tomas','tcampo','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,1,NULL,NULL,NULL,NULL),(2,'Sandra','san','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,2,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -220,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-31 11:09:07
+-- Dump completed on 2024-05-31 11:38:24

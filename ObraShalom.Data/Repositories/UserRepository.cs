@@ -1,4 +1,5 @@
 ﻿using ObraShalom.Domain.Dto;
+using ObraShalom.Domain.Entities;
 
 namespace ObraShalom.Data.Repositories
 {
@@ -12,9 +13,9 @@ namespace ObraShalom.Data.Repositories
             {
                 UserReponse response = new();
                 string spassword = Encrypt.GetSHA256(auth.Password);
-                var sql = "Select * from users where Username = @Username and Password = @spassword";
+                var sql = "Select * from usuario where Username = @Username and Password = @spassword";
 
-                var usuario = connection.QuerySingle<User>(sql, new { auth.Username, spassword });
+                var usuario = connection.QuerySingle<UserDto>(sql, new { auth.Username, spassword });
 
                 if (usuario == null) return null;
 
@@ -31,7 +32,7 @@ namespace ObraShalom.Data.Repositories
             }
         }
 
-        private string GetToken(User usuario)
+        private string GetToken(UserDto usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_settings.Secret);
@@ -50,6 +51,42 @@ namespace ObraShalom.Data.Repositories
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+
+        public Task CrearUsuario(UserEntity usuario)
+        {
+            try
+            {
+                string spassword = Encrypt.GetSHA256(usuario.Password);
+                var sql = $"insert into usuario (name, username, password, idrol, idobra) " +
+                    $"values (@name, @username, @spassword, @idrol, @idobra)";
+
+                return connection.ExecuteAsync(sql, new
+                {
+                    usuario.Name,
+                    usuario.Username,
+                    usuario.Password,
+                    usuario.IdRol,
+                    usuario.IdObra
+                });
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Task<IEnumerable<UserDto>> ListarUsuario()
+        {
+            try
+            {
+                var sql = $"select * from usuario ";
+                return  connection.QueryAsync<UserDto>(sql);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

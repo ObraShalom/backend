@@ -20,9 +20,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
-//Conexión
+//Conexiï¿½n
 builder.Services.AddScoped<IDbConnection>((sp) => new MySqlConnection(connString));
-//Injección de dependencias
+//Injecciï¿½n de dependencias
 
 //Respositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -68,7 +68,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigins",
         policy =>
         {
-            policy.WithOrigins("*") // Lista de orígenes permitidos
+            policy.WithOrigins("*") // Lista de orï¿½genes permitidos
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
