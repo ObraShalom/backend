@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace ObraShalom.Domain.Entities
 {
-    public class ObraEntity(int id, string nombre)
+    public class ObraEntity(int id, string nombre, bool activo)
     {
         public int Id { get; set; } = id;
         public string? Nombre { get; set; } = nombre;
+        public bool Activo { get; set; } = activo;
+
     }
 }

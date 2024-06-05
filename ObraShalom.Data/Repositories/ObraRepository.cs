@@ -27,5 +27,18 @@ namespace ObraShalom.Data.Repositories
                 return await connection.QueryFirstAsync<ObraDto>(sql);
             
         }
+
+        public Task CrearObra(ObraEntity obra)
+        {
+            var sql = $"insert into obra (nombre, activo) " +
+                $"values (@nombre, @activo)";
+
+            return connection.ExecuteAsync(sql, new
+            {
+                obra.Nombre,
+                obra.Activo
+            });
+
+        }
     }
 }

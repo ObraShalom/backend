@@ -65,10 +65,10 @@ CREATE TABLE `evento` (
   `usumod` varchar(45) DEFAULT NULL,
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
-  KEY `ibobra_idx` (`idobra`),
   KEY `idtipo` (`idtipo`),
-  CONSTRAINT `ibobra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
-  CONSTRAINT `idtipo` FOREIGN KEY (`idtipo`) REFERENCES `tipoevento` (`id`)
+  KEY `obra_idx` (`idobra`),
+  CONSTRAINT `idtipo` FOREIGN KEY (`idtipo`) REFERENCES `tipoevento` (`id`),
+  CONSTRAINT `odobraevento` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,9 +101,9 @@ CREATE TABLE `grupo` (
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idobra_idx` (`idobra`),
   KEY `idtipogrupo_idx` (`idtipogrupo`),
-  CONSTRAINT `idobra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
+  KEY `idobragrupo_idx` (`idobra`),
+  CONSTRAINT `idobragrupo` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
   CONSTRAINT `idtipogrupo` FOREIGN KEY (`idtipogrupo`) REFERENCES `tipogrupo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -126,7 +126,7 @@ DROP TABLE IF EXISTS `obra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `obra` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `activo` bit(1) DEFAULT NULL,
   `usucre` varchar(45) DEFAULT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE `obra` (
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,8 +143,32 @@ CREATE TABLE `obra` (
 
 LOCK TABLES `obra` WRITE;
 /*!40000 ALTER TABLE `obra` DISABLE KEYS */;
-INSERT INTO `obra` VALUES (1,'Bogota',_binary '',NULL,NULL,NULL,NULL),(2,'Panama',_binary '',NULL,NULL,NULL,NULL);
+INSERT INTO `obra` VALUES (1,'Bogota',_binary '',NULL,NULL,NULL,NULL),(2,'Panama',_binary '',NULL,NULL,NULL,NULL),(3,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(4,'Obra nueva',_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `obra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rol`
+--
+
+DROP TABLE IF EXISTS `rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rol` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rol`
+--
+
+LOCK TABLES `rol` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `rol` VALUES (1,'Administrador'),(2,'Usuario');
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,8 +246,10 @@ CREATE TABLE `usuario` (
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE,
-  KEY `idobra_idx` (`idobra`),
-  CONSTRAINT `obra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`)
+  KEY `rol_idx` (`IdRol`),
+  KEY `obra_idx` (`idobra`),
+  CONSTRAINT `obra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
+  CONSTRAINT `rol` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-03 23:26:55
+-- Dump completed on 2024-06-05 20:11:47
