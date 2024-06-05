@@ -14,16 +14,18 @@ namespace ObraShalom.Data.Repositories
 
         public async Task<IEnumerable<ObraDto>> ObtenerObra()
         {
-            try
-            {
+            
                 var sql = $"Select * from obra ";
                 return await connection.QueryAsync<ObraDto>(sql);
-            }
-            catch (Exception ex)
-            {
+            
+        }
 
-                throw;
-            }
+        public async Task<ObraDto> ObtenerObra(int id, bool? active)
+        {
+            
+                var sql = $"Select * from obra where id = {id} and activo = {active}";
+                return await connection.QueryFirstAsync<ObraDto>(sql);
+            
         }
     }
 }

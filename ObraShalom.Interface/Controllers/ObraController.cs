@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ObraShalom.Domain.Entities;
-using ObraShalom.Service;
 using ObraShalom.Service.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,17 +13,21 @@ namespace ObraShalom.Interface.Controllers
         private readonly IObraService _obraService = obraService;
 
         // GET: api/<ObraController>
+        [ProducesResponseType(typeof(IEnumerable<ObraEntity>), 200)]
         [HttpGet]
-        public async Task<IEnumerable<ObraEntity>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _obraService.ObtenerObra();
+            return Ok(await _obraService.ObtenerObra());
         }
 
         // GET api/<ObraController>/5
+        [ProducesResponseType(typeof(ObraEntity), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        [ProducesResponseType(typeof(string), 404)]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id, bool? activo = false)
         {
-            return "value";
+            return Ok(await _obraService.ObtenerObra(id, activo));
         }
 
         // POST api/<ObraController>

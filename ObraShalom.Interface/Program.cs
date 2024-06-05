@@ -5,6 +5,7 @@ using ObraShalom.Data.Interfaces;
 using ObraShalom.Data.Repositories;
 using ObraShalom.Domain.Interfaces;
 using ObraShalom.Domain.Models.Common;
+using ObraShalom.Interface.Helpers;
 using ObraShalom.Service;
 using ObraShalom.Service.Interfaces;
 using System.Data;
@@ -76,6 +77,7 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -14,6 +14,12 @@ namespace ObraShalom.Domain.Entities
         public string Password { get; set; } = password;
         public int IdRol { get; set; } = idRol;
         public int IdObra { get; set; } = idObra;
-        public string Tokcen { get; set; } = token;
+        public string Token { get; set; } = token;
+        public string Obra { get; set; }
+        public string Rol { get; set; }
+        public static string ObtenerObra(string obra) => obra;
+        public static string ObtenerRol(string rol) => rol;
     }
+
+    
 }

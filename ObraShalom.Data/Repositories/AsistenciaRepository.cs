@@ -12,15 +12,8 @@ namespace ObraShalom.Data.Repositories
     {
         public async Task<IEnumerable<AsistenciaDto>> ObtenerAsistencia(int idGrupo = default)
         {
-            try
-            {
                 var sql = $"Select * from asistencia where idgrupo = {idGrupo} ";
                 return await connection.QueryAsync<AsistenciaDto>(sql);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
     }
 }

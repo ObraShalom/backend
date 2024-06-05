@@ -9,8 +9,7 @@ namespace ObraShalom.Data.Repositories
 
         public UserReponse Auth(AuthRequest auth)
         {
-            try
-            {
+            
                 UserReponse response = new();
                 string spassword = Encrypt.GetSHA256(auth.Password);
                 var sql = "Select * from usuario where Username = @Username and Password = @spassword";
@@ -23,13 +22,6 @@ namespace ObraShalom.Data.Repositories
                 response.Token = GetToken(usuario);
 
                 return response;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
         }
 
         private string GetToken(UserDto usuario)
@@ -54,8 +46,6 @@ namespace ObraShalom.Data.Repositories
 
         public Task CrearUsuario(UserEntity usuario)
         {
-            try
-            {
                 string spassword = Encrypt.GetSHA256(usuario.Password);
                 var sql = $"insert into usuario (name, username, password, idrol, idobra) " +
                     $"values (@name, @username, @spassword, @idrol, @idobra)";
@@ -68,24 +58,16 @@ namespace ObraShalom.Data.Repositories
                     usuario.IdRol,
                     usuario.IdObra
                 });
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            
         }
 
         public Task<IEnumerable<UserDto>> ListarUsuario()
         {
-            try
-            {
-                var sql = $"select * from usuario ";
+                var sql = @$"select u.*, o.nombre as obra, r.nombre as rol
+                         from usuario u 
+                         inner join rol r on r.id = u.idrol 
+                         inner join obra o on o.id = u.idobra ";
                 return  connection.QueryAsync<UserDto>(sql);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
     }
 }

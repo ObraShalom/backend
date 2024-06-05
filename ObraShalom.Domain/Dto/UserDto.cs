@@ -11,6 +11,7 @@ namespace ObraShalom.Domain.Dto
         public required string Password { get; set; }
         public int IdRol { get; set; }
         public int IdObra { get; set; }
-
+        public string Obra { get; set; }
+        public string Rol { get; set; }
     }
 }
