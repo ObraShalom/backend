@@ -12,15 +12,8 @@ namespace ObraShalom.Data.Repositories
     {
         public async Task<IEnumerable<EventoDto>> ObtenerEvento(int idTipo, int idObra)
         {
-            try
-            {
-                var sql = $"Select * from evento where idtipo = {idTipo} and idobra = {idObra} ";
-                return await connection.QueryAsync<EventoDto>(sql);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            var sql = $"Select * from evento where idtipo = {idTipo} and idobra = {idObra} ";
+            return await connection.QueryAsync<EventoDto>(sql);
         }
     }
 }

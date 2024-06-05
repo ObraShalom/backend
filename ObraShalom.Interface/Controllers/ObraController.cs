@@ -9,24 +9,29 @@ namespace ObraShalom.Interface.Controllers
         private readonly IObraService _obraService = obraService;
 
         // GET: api/<ObraController>
-
+        [ProducesResponseType(typeof(IEnumerable<ObraEntity>), 200)]
         [HttpGet]
-        public async Task<IEnumerable<ObraEntity>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _obraService.ObtenerObra();
+            return Ok(await _obraService.ObtenerObra());
         }
 
         // GET api/<ObraController>/5
+        [ProducesResponseType(typeof(ObraEntity), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        [ProducesResponseType(typeof(string), 404)]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id, bool? activo = false)
         {
-            return "value";
+            return Ok(await _obraService.ObtenerObra(id, activo));
         }
 
         // POST api/<ObraController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] ObraEntity value)
         {
+            await _obraService.CrearObra(value);
+            return Ok();
         }
 
         // PUT api/<ObraController>/5

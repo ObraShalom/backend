@@ -14,16 +14,42 @@ namespace ObraShalom.Data.Repositories
 
         public async Task<IEnumerable<ObraDto>> ObtenerObra()
         {
-            try
-            {
-                var sql = $"Select * from obra ";
-                return await connection.QueryAsync<ObraDto>(sql);
-            }
-            catch (Exception ex)
-            {
 
-                throw;
-            }
+            var sql = $"Select * from obra ";
+            return await connection.QueryAsync<ObraDto>(sql);
+
+        }
+
+        public async Task<ObraDto> ObtenerObra(int id, bool? active)
+        {
+
+            var sql = $"Select * from obra where id = {id} and activo = {active}";
+            return await connection.QueryFirstAsync<ObraDto>(sql);
+
+        }
+
+        public async Task CrearObra(ObraEntity obra)
+        {
+            var ObtenerNombre = await ObtenerObra(nombre: obra.Nombre?.Trim());
+
+            if (obra != null)
+                throw new Exception("El nombre de la obra ya existe");
+
+            var sql = $"insert into obra (nombre, activo) " +
+                $"values (@nombre, @activo)";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                obra.Nombre,
+                obra.Activo
+            });
+        }
+
+        public async Task<ObraDto> ObtenerObra(string nombre)
+        {
+            var sql = $"Select * from obra where id = @nombre and activo = @activo";
+            ObraDto? obraDto = await connection.QueryFirstOrDefaultAsync<ObraDto>(sql, new { Nombre = nombre, Activo = true });
+            return obraDto;
         }
     }
 }

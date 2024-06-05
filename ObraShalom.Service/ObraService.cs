@@ -14,7 +14,19 @@ namespace ObraShalom.Service
 
             var obra = await _repository.ObtenerObra();
             return from g in obra
-                   select new ObraEntity(g.Id, nombre: g.Nombre);
+                   select new ObraEntity(g.Id, nombre: g.Nombre, g.Activo);
+        }
+
+        public async Task<ObraEntity> ObtenerObra(int id, bool? activo = true)
+        {
+            var obra = await _repository.ObtenerObra(id, activo);
+            return new ObraEntity(obra.Id, nombre: obra.Nombre, obra.Activo);
+        }
+
+        public Task CrearObra(ObraEntity obra)
+        {
+            var obraEntity = new ObraEntity(obra.Id, obra.Nombre, obra.Activo);
+            return _repository.CrearObra(obraEntity);
         }
     }
 }
