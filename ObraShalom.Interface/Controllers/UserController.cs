@@ -35,5 +35,12 @@ namespace backend.Controllers
             var result = await _userService.ListarUsuarios();
             return Ok(result);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] UserEntity user)
+        {
+            await _userService.ActualizarUsuario(id, user);
+            return Ok();
+        }
     }
 }

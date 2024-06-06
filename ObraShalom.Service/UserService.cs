@@ -17,7 +17,7 @@ namespace ObraShalom.Service
 
         public Task CrearUsuario(UserEntity user, string token)
         {
-            var userEntity = new UserEntity(user.Id, user.Name, user.Username, user.Password, user.IdRol, user.IdObra, token);
+            var userEntity = new UserEntity(user.Id, user.Name, user.Username, user.Password, user.IdRol, user.IdObra, user.Activo, token);
             return _userRepository.CrearUsuario(userEntity);
         }
 
@@ -25,7 +25,13 @@ namespace ObraShalom.Service
 
             var usuario = await _userRepository.ListarUsuario();
             return from u in usuario
-                   select new UserEntity(u.Id, u.Name, u.Username, u.Password, u.IdRol, u.IdObra) { Obra = UserEntity.ObtenerObra(u.Obra), Rol = UserEntity.ObtenerRol(u.Rol), };
+                   select new UserEntity(u.Id, u.Name, u.Username, u.Password, u.IdRol, u.IdObra, u.Activo) { Obra = UserEntity.ObtenerObra(u.Obra), Rol = UserEntity.ObtenerRol(u.Rol), };
+        }
+
+        public Task ActualizarUsuario(int id, UserEntity user)
+        {
+            var userEntity = new UserEntity(id, user.Name, user.Username, user.Password, user.IdRol, user.IdObra, user.Activo);
+            return _userRepository.ActualizarUsuario(userEntity);
         }
     }
 }

@@ -7,5 +7,6 @@ namespace ObraShalom.Service.Interfaces
         Task<IEnumerable<ObraEntity>> ObtenerObra();
         Task<ObraEntity> ObtenerObra(int id, bool? activo = true);
         Task CrearObra(ObraEntity obra);
+        Task ActualizarObra(int id, ObraEntity obra);
     }
 }
