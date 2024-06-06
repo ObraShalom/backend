@@ -49,7 +49,7 @@ namespace ObraShalom.Data.Repositories
         {
                 string spassword = Encrypt.GetSHA256(usuario.Password);
                 var sql = $"insert into usuario (name, username, password, idrol, idobra) " +
-                    $"values (@name, @username, @spassword, @idrol, @idobra)";
+                    $"values (@name, @username, @password, @idrol, @idobra)";
 
                 return connection.ExecuteAsync(sql, new
                 {
