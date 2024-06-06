@@ -31,11 +31,12 @@ namespace ObraShalom.Data.Repositories
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
-                [
-                    new(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-                    new(ClaimTypes.Name, usuario.Username.ToString()),
-                ]),
-                Expires = DateTime.UtcNow.AddHours(3),
+                    new Claim[]
+                    {
+                        new(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+                        new(ClaimTypes.Name, usuario.Username.ToString()),
+                    }),
+                Expires = DateTime.UtcNow.AddDays(60),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
 

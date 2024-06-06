@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ObraShalom.Domain.Entities;
-using ObraShalom.Service;
-using ObraShalom.Service.Interfaces;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ObraShalom.Interface.Controllers
 {
