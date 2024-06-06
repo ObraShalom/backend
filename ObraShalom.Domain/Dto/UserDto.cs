@@ -13,5 +13,7 @@ namespace ObraShalom.Domain.Dto
         public int IdObra { get; set; }
         public string Obra { get; set; }
         public string Rol { get; set; }
+        public bool Activo { get; set; }
+
     }
 }

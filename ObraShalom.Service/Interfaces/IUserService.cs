@@ -14,5 +14,6 @@ namespace ObraShalom.Service.Interfaces
         UserReponse Auth(AuthRequest auth);
         Task CrearUsuario(UserEntity user, string token);
         Task<IEnumerable<UserEntity>> ListarUsuarios();
+        Task ActualizarUsuario(int id, UserEntity user);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ObraShalom.Data.Interfaces;
-using ObraShalom.Domain.Dto;
 using ObraShalom.Domain.Entities;
 using ObraShalom.Service.Interfaces;
 
@@ -23,10 +22,21 @@ namespace ObraShalom.Service
             return new ObraEntity(obra.Id, nombre: obra.Nombre, obra.Activo);
         }
 
-        public Task CrearObra(ObraEntity obra)
+        public async Task CrearObra(ObraEntity obra)
         {
             var obraEntity = new ObraEntity(obra.Id, obra.Nombre, obra.Activo);
-            return _repository.CrearObra(obraEntity);
+            var ObtenerNombre = await _repository.ObtenerObra(nombre: obra.Nombre?.Trim());
+
+            if (ObtenerNombre != null)
+                throw new Exception("El nombre de la obra ya existe");
+
+            await _repository.CrearObra(obraEntity);
+        }
+
+        public async Task ActualizarObra(int id, ObraEntity obra)
+        {
+            var obraEntity = new ObraEntity(id, obra.Nombre, obra.Activo);
+            await _repository.ActualizarObra(obraEntity);
         }
     }
 }

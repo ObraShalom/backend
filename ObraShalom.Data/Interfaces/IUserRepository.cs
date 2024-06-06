@@ -9,5 +9,6 @@ namespace ObraShalom.Domain.Interfaces
         UserReponse Auth(AuthRequest auth);
         Task CrearUsuario(UserEntity usuario);
         Task<IEnumerable<UserDto>> ListarUsuario();
+        Task ActualizarUsuario(UserEntity usuario);
     }
 }

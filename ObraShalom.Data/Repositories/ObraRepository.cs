@@ -1,11 +1,5 @@
 ﻿using ObraShalom.Data.Interfaces;
-using ObraShalom.Domain.Dto;
 using ObraShalom.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ObraShalom.Data.Repositories
 {
@@ -30,11 +24,6 @@ namespace ObraShalom.Data.Repositories
 
         public async Task CrearObra(ObraEntity obra)
         {
-            var ObtenerNombre = await ObtenerObra(nombre: obra.Nombre?.Trim());
-
-            if (obra != null)
-                throw new Exception("El nombre de la obra ya existe");
-
             var sql = $"insert into obra (nombre, activo) " +
                 $"values (@nombre, @activo)";
 
@@ -45,11 +34,31 @@ namespace ObraShalom.Data.Repositories
             });
         }
 
-        public async Task<ObraDto> ObtenerObra(string nombre)
+        public async Task<ObraDto> ObtenerObra(string nombre, int? id)
         {
-            var sql = $"Select * from obra where id = @nombre and activo = @activo";
+            var sql = @$"Select * 
+                      from obra 
+                      where id = @nombre 
+                      and activo = @activo";
             ObraDto? obraDto = await connection.QueryFirstOrDefaultAsync<ObraDto>(sql, new { Nombre = nombre, Activo = true });
             return obraDto;
+        }
+
+        public async Task ActualizarObra(ObraEntity obra)
+        {
+            var sql = $"update obra set nombre = @nombre, activo = @activo where id = @id";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                obra.Id,
+                obra.Nombre,
+                obra.Activo
+            });
+        }
+
+        public Task<ObraDto> ObtenerObra(string nombre)
+        {
+            throw new NotImplementedException();
         }
     }
 }

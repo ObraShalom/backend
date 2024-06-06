@@ -36,8 +36,10 @@ namespace ObraShalom.Interface.Controllers
 
         // PUT api/<ObraController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] ObraEntity obra)
         {
+            await _obraService.ActualizarObra(id, obra);
+            return Ok();
         }
 
         // DELETE api/<ObraController>/5
