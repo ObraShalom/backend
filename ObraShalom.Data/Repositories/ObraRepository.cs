@@ -36,16 +36,20 @@ namespace ObraShalom.Data.Repositories
 
         public async Task<ObraDto> ObtenerObra(string nombre, int? id)
         {
+            var idValidation = id != null ? " and id <> @id " : "";
+
             var sql = @$"Select * 
                       from obra 
-                      where id = @nombre 
-                      and activo = @activo";
-            ObraDto? obraDto = await connection.QueryFirstOrDefaultAsync<ObraDto>(sql, new { Nombre = nombre, Activo = true });
+                      where nombre = @nombre 
+                      and activo = @activo 
+                      {idValidation}";
+            ObraDto? obraDto = await connection.QueryFirstOrDefaultAsync<ObraDto>(sql, new { Nombre = nombre, Activo = true, Id = id });
             return obraDto;
         }
 
         public async Task ActualizarObra(ObraEntity obra)
         {
+
             var sql = $"update obra set nombre = @nombre, activo = @activo where id = @id";
 
             await connection.ExecuteAsync(sql, new
@@ -56,9 +60,5 @@ namespace ObraShalom.Data.Repositories
             });
         }
 
-        public Task<ObraDto> ObtenerObra(string nombre)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

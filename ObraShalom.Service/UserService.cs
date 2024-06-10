@@ -15,10 +15,15 @@ namespace ObraShalom.Service
             return _userRepository.Auth(auth);
         }
 
-        public Task CrearUsuario(UserEntity user, string token)
+        public async Task CrearUsuario(UserEntity user, string token)
         {
-            var userEntity = new UserEntity(user.Id, user.Name, user.Username, user.Password, user.IdRol, user.IdObra, user.Activo, token);
-            return _userRepository.CrearUsuario(userEntity);
+            var ObtenerNombre = await _userRepository.ObtenerUsuario(nombre: user.Name?.Trim(), username: user.Username?.Trim());
+
+            if (ObtenerNombre != null)
+                throw new Exception("El nombre del usuario ya existe");
+
+            var userEntity = new UserEntity(user.Id, user.Name, user.Username, user.Password, user.IdRol, user.IdObra, user.Activo);
+            await _userRepository.CrearUsuario(userEntity);
         }
 
         public async Task<IEnumerable<UserEntity>> ListarUsuarios() {
@@ -28,10 +33,15 @@ namespace ObraShalom.Service
                    select new UserEntity(u.Id, u.Name, u.Username, u.Password, u.IdRol, u.IdObra, u.Activo) { Obra = UserEntity.ObtenerObra(u.Obra), Rol = UserEntity.ObtenerRol(u.Rol), };
         }
 
-        public Task ActualizarUsuario(int id, UserEntity user)
+        public async Task ActualizarUsuario(int id, UserEntity user)
         {
+            var ObtenerNombre = await _userRepository.ObtenerUsuario(nombre: user.Name?.Trim(), username: user.Username?.Trim(), id);
+
+            if (ObtenerNombre != null)
+                throw new Exception("El nombre del usuario ya existe");
+
             var userEntity = new UserEntity(id, user.Name, user.Username, user.Password, user.IdRol, user.IdObra, user.Activo);
-            return _userRepository.ActualizarUsuario(userEntity);
+            await _userRepository.ActualizarUsuario(userEntity);
         }
     }
 }

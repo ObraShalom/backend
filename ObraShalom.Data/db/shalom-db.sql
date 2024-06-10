@@ -143,7 +143,7 @@ CREATE TABLE `obra` (
 
 LOCK TABLES `obra` WRITE;
 /*!40000 ALTER TABLE `obra` DISABLE KEYS */;
-INSERT INTO `obra` VALUES (1,'Bogota',_binary '',NULL,NULL,NULL,NULL),(2,'Panama',_binary '',NULL,NULL,NULL,NULL),(3,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(4,'Obra nueva',_binary '',NULL,NULL,NULL,NULL);
+INSERT INTO `obra` VALUES (1,'Bogota',_binary '\0',NULL,NULL,NULL,NULL),(2,'Panama',_binary '',NULL,NULL,NULL,NULL),(3,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(4,'Obra nueva',_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,6 +245,7 @@ CREATE TABLE `usuario` (
   `usumod` varchar(45) DEFAULT NULL,
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
+  `activo` bit(1) DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE,
   KEY `rol_idx` (`IdRol`),
   KEY `obra_idx` (`idobra`),
@@ -259,7 +260,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Tomas','tcampo','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,1,NULL,NULL,NULL,NULL),(2,'Sandra','san','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,2,NULL,NULL,NULL,NULL),(3,'test','test3','test',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES (1,'Tomas1','tcampo','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,1,NULL,NULL,NULL,NULL,_binary ''),(2,'Sandra','san','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,2,NULL,NULL,NULL,NULL,_binary ''),(3,'test','test3','test',1,1,NULL,NULL,NULL,NULL,_binary '');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -272,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-05 20:11:47
+-- Dump completed on 2024-06-06 23:22:00

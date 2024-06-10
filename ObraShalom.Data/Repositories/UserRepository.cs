@@ -9,19 +9,19 @@ namespace ObraShalom.Data.Repositories
 
         public UserReponse Auth(AuthRequest auth)
         {
-            
-                UserReponse response = new();
-                string spassword = Encrypt.GetSHA256(auth.Password);
-                var sql = "Select * from usuario where Username = @Username and Password = @spassword";
 
-                var usuario = connection.QuerySingle<UserDto>(sql, new { auth.Username, spassword });
+            UserReponse response = new();
+            string spassword = Encrypt.GetSHA256(auth.Password);
+            var sql = "Select * from usuario where Username = @Username and Password = @spassword";
 
-                if (usuario == null) return null;
+            var usuario = connection.QuerySingle<UserDto>(sql, new { auth.Username, spassword });
 
-                response.Username = usuario.Username;
-                response.Token = GetToken(usuario);
+            if (usuario == null) return null;
 
-                return response;
+            response.Username = usuario.Username;
+            response.Token = GetToken(usuario);
+
+            return response;
         }
 
         private string GetToken(UserDto usuario)
@@ -61,16 +61,31 @@ namespace ObraShalom.Data.Repositories
                     usuario.Activo
                 });
             
+            string password = Encrypt.GetSHA256(usuario.Password);
+            var sql = $"insert into usuario (name, username, password, idrol, idobra) " +
+                $"values (@name, @username, @password, @idrol, @idobra)";
+
+            return connection.ExecuteAsync(sql, new
+            {
+                usuario.Name,
+                usuario.Username,
+                usuario.Password,
+                usuario.IdRol,
+                usuario.IdObra
+            });
+
         }
 
         public Task<IEnumerable<UserDto>> ListarUsuario()
         {
-                var sql = @$"select u.*, o.nombre as obra, r.nombre as rol
+            var sql = @$"select u.*, o.nombre as obra, r.nombre as rol
                          from usuario u 
                          inner join rol r on r.id = u.idrol 
                          inner join obra o on o.id = u.idobra 
                          Order By id asc";
                 return  connection.QueryAsync<UserDto>(sql);
+                         inner join obra o on o.id = u.idobra ";
+            return connection.QueryAsync<UserDto>(sql);
         }
 
         public Task ActualizarUsuario(UserEntity usuario)
@@ -88,6 +103,19 @@ namespace ObraShalom.Data.Repositories
                 usuario.Activo
             });
 
+        }
+
+        public async Task<UserDto> ObtenerUsuario(string nombre, string username, int? id = default)
+        {
+            var idValidation = id != null ? " and id <> @id " : "";
+            var sql = @$"Select * 
+                      from usuario 
+                      where (name = @nombre or username = @username)
+                      and activo = @activo 
+                      {idValidation} ";
+
+            UserDto? userDto = await connection.QueryFirstOrDefaultAsync<UserDto>(sql, new { Nombre = nombre, Activo = true, Username = username, Id = id });
+            return userDto;
         }
     }
 }
