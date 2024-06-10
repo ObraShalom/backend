@@ -48,16 +48,17 @@ namespace ObraShalom.Data.Repositories
         public Task CrearUsuario(UserEntity usuario)
         {
                 string password = Encrypt.GetSHA256(usuario.Password);
-                var sql = $"insert into usuario (name, username, password, idrol, idobra) " +
-                    $"values (@name, @username, @password, @idrol, @idobra)";
+                var sql = $"insert into usuario (name, username, password, idrol, idobra, activo) " +
+                    $"values (@name, @username, @password, @idrol, @idobra, @activo)";
 
                 return connection.ExecuteAsync(sql, new
                 {
                     usuario.Name,
                     usuario.Username,
-                    usuario.Password,
+                    password,
                     usuario.IdRol,
-                    usuario.IdObra
+                    usuario.IdObra,
+                    usuario.Activo
                 });
             
         }
@@ -67,7 +68,8 @@ namespace ObraShalom.Data.Repositories
                 var sql = @$"select u.*, o.nombre as obra, r.nombre as rol
                          from usuario u 
                          inner join rol r on r.id = u.idrol 
-                         inner join obra o on o.id = u.idobra ";
+                         inner join obra o on o.id = u.idobra 
+                         Order By id asc";
                 return  connection.QueryAsync<UserDto>(sql);
         }
 
