@@ -24,17 +24,22 @@ namespace ObraShalom.Service
 
         public async Task CrearObra(ObraEntity obra)
         {
-            var obraEntity = new ObraEntity(obra.Id, obra.Nombre, obra.Activo);
             var ObtenerNombre = await _repository.ObtenerObra(nombre: obra.Nombre?.Trim());
 
             if (ObtenerNombre != null)
                 throw new Exception("El nombre de la obra ya existe");
 
+            var obraEntity = new ObraEntity(obra.Id, obra.Nombre, obra.Activo);
             await _repository.CrearObra(obraEntity);
         }
 
         public async Task ActualizarObra(int id, ObraEntity obra)
         {
+            var ObtenerNombre = await _repository.ObtenerObra(nombre: obra.Nombre?.Trim(), id);
+
+            if (ObtenerNombre != null)
+                throw new Exception("El nombre de la obra ya existe");
+
             var obraEntity = new ObraEntity(id, obra.Nombre, obra.Activo);
             await _repository.ActualizarObra(obraEntity);
         }
