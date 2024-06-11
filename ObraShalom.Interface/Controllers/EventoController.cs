@@ -6,7 +6,6 @@ namespace ObraShalom.Interface.Controllers
     [ApiController]
     public class EventoController(IEventoService eventoService) : ControllerBase
     {
-        private const string V = "{idObra}";
         private readonly IEventoService _eventoService = eventoService;
 
         // GET: api/<EventoController>
@@ -17,10 +16,10 @@ namespace ObraShalom.Interface.Controllers
         }
 
         // GET api/<EventoController>/5
-        [HttpGet(V)]
-        public async Task<IEnumerable<EventoEntity>> Get(int idObra, int idTipo)
+        [HttpGet("{idObra}")]
+        public async Task<IActionResult> Get(int idObra, int idTipo)
         {
-            return await _eventoService.ObtenerEvento(idObra, idTipo);
+            return Ok(await _eventoService.ObtenerEvento(idObra, idTipo));
         }
 
         // POST api/<EventoController>

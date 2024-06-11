@@ -30,6 +30,7 @@ builder.Services.AddScoped<IGrupoRepository, GrupoRepository>();
 builder.Services.AddScoped<IObraRepository, ObraRepository>();
 builder.Services.AddScoped<IAsistenciaRepository, AsistenciaRepository>();
 builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
 
 
 //Services
@@ -38,6 +39,7 @@ builder.Services.AddScoped<IGrupoService, GrupoService>();
 builder.Services.AddScoped<IObraService, ObraService>();
 builder.Services.AddScoped<IAsistenciaService, AsistenciaService>();
 builder.Services.AddScoped<IEventoService, EventoService>();
+builder.Services.AddScoped<ITipoEventoService, TipoEventoService>();
 
 //jwt
 var appSettingSection = builder.Configuration.GetSection("AppSettings");
