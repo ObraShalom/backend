@@ -9,7 +9,7 @@ namespace ObraShalom.Domain.Dto
     public class AsistenciaDto
     {
         public int Id { get; set; }
-        public int Mes { get; set; }
+        public DateTime Fecha { get; set; }
         public int IdGrupo { get; set; }
         public int NumComprometidos { get; set; }
     }

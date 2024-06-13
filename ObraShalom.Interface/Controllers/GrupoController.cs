@@ -24,14 +24,18 @@ namespace ObraShalom.Interface.Controllers
 
         // POST api/<GrupoOracionController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] GrupoEntity value)
         {
+            await _grupoService.CrearGrupo(value);
+            return Ok();
         }
 
         // PUT api/<GrupoOracionController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] GrupoEntity obra)
         {
+            await _grupoService.ActualizarGrupo(id, obra);
+            return Ok();
         }
 
         // DELETE api/<GrupoOracionController>/5
