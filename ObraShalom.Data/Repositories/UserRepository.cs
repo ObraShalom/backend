@@ -7,7 +7,7 @@ namespace ObraShalom.Data.Repositories
     {
         private readonly AppSettings _settings = settings.Value;
 
-        public UserReponse Auth(AuthRequest auth)
+        public UserReponse? Auth(AuthRequest auth)
         {
 
             UserReponse response = new();
@@ -60,19 +60,6 @@ namespace ObraShalom.Data.Repositories
                     usuario.IdObra,
                     usuario.Activo
                 });
-            
-            string password = Encrypt.GetSHA256(usuario.Password);
-            var sql = $"insert into usuario (name, username, password, idrol, idobra) " +
-                $"values (@name, @username, @password, @idrol, @idobra)";
-
-            return connection.ExecuteAsync(sql, new
-            {
-                usuario.Name,
-                usuario.Username,
-                usuario.Password,
-                usuario.IdRol,
-                usuario.IdObra
-            });
 
         }
 
@@ -84,8 +71,6 @@ namespace ObraShalom.Data.Repositories
                          inner join obra o on o.id = u.idobra 
                          Order By id asc";
                 return  connection.QueryAsync<UserDto>(sql);
-                         inner join obra o on o.id = u.idobra ";
-            return connection.QueryAsync<UserDto>(sql);
         }
 
         public Task ActualizarUsuario(UserEntity usuario)
@@ -105,7 +90,7 @@ namespace ObraShalom.Data.Repositories
 
         }
 
-        public async Task<UserDto> ObtenerUsuario(string nombre, string username, int? id = default)
+        public async Task<UserDto?> ObtenerUsuario(string nombre, string username, int? id = default)
         {
             var idValidation = id != null ? " and id <> @id " : "";
             var sql = @$"Select * 
