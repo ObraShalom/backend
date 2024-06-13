@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ObraShalom.Domain.Entities
 {
-    public class AsistenciaEntity(int id, int mes, int idGrupo, int numComprometidos)
+    public class AsistenciaEntity(int id, DateTime fecha, int idGrupo, int numComprometidos)
     {
         public int Id { get; set; } = id;
-        public int Mes { get; set; } = mes;
+        public DateTime Fecha { get; set; } = fecha;
         public int IdGrupo { get; set; } = idGrupo;
         public int NumComprometidos { get; set; } = numComprometidos;
     }

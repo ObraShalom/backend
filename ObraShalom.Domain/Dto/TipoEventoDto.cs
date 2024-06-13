@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace ObraShalom.Domain.Dto
 {
-    public class AsistenciaDto
+    public class TipoEventoDto
     {
         public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public int IdGrupo { get; set; }
-        public int NumComprometidos { get; set; }
+        public string Nombre { get; set; }
     }
 }

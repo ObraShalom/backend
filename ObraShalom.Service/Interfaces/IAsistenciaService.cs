@@ -9,6 +9,9 @@ namespace ObraShalom.Service.Interfaces
 {
     public interface IAsistenciaService
     {
-        Task<IEnumerable<AsistenciaEntity>> ObtenerAsistencia(int idGrupo);
+        Task<IEnumerable<AsistenciaEntity>> ObtenerAsistencia(int? idGrupo = default);
+        Task EliminarAsistencia(int id);
+        Task CrearAsistencia(AsistenciaEntity asistencia);
+        Task ActualizarAsistencia(int id, AsistenciaEntity asistencia);
     }
 }

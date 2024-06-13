@@ -13,5 +13,7 @@ namespace ObraShalom.Domain.Dto
         public int NumPersonas { get; set; }
         public int IdTipoGrupo { get; set; }
         public int IdObra { get; set; }
+        public bool Activo { get; set; }
+
     }
 }

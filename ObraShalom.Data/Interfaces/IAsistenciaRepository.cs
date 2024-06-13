@@ -1,4 +1,5 @@
 ﻿using ObraShalom.Domain.Dto;
+using ObraShalom.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace ObraShalom.Data.Interfaces
 {
     public interface IAsistenciaRepository
     {
-        Task<IEnumerable<AsistenciaDto>> ObtenerAsistencia(int idGrupo);
+        Task<IEnumerable<AsistenciaDto>> ObtenerAsistencia(int? idGrupo = default);
+        Task CrearAsistencia(AsistenciaEntity asistencia);
+        Task ActualizarAsistencia(AsistenciaEntity asistencia);
+        Task EliminarAsistencia(int id);
     }
 }

@@ -24,17 +24,16 @@ DROP TABLE IF EXISTS `asistencia`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `asistencia` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `idmes` int DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
   `numcomprometidos` int DEFAULT NULL,
   `idgrupo` int DEFAULT NULL,
-  `annio` int DEFAULT NULL,
   `usucre` varchar(45) DEFAULT NULL,
   `usumod` varchar(45) DEFAULT NULL,
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `grupo` FOREIGN KEY (`id`) REFERENCES `grupo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +42,7 @@ CREATE TABLE `asistencia` (
 
 LOCK TABLES `asistencia` WRITE;
 /*!40000 ALTER TABLE `asistencia` DISABLE KEYS */;
-INSERT INTO `asistencia` VALUES (1,1,10,1,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `asistencia` VALUES (3,'2024-06-15',0,1,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `asistencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +104,7 @@ CREATE TABLE `grupo` (
   KEY `idobragrupo_idx` (`idobra`),
   CONSTRAINT `idobragrupo` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
   CONSTRAINT `idtipogrupo` FOREIGN KEY (`idtipogrupo`) REFERENCES `tipogrupo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +113,7 @@ CREATE TABLE `grupo` (
 
 LOCK TABLES `grupo` WRITE;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-INSERT INTO `grupo` VALUES (1,'Test',10,1,1,_binary '',NULL,NULL,NULL,NULL),(2,'Test 2',11,1,1,_binary '',NULL,NULL,NULL,NULL),(3,'Obra 3',12,2,2,_binary '',NULL,NULL,NULL,NULL);
+INSERT INTO `grupo` VALUES (1,'Test',10,1,1,_binary '',NULL,NULL,NULL,NULL),(2,'Test 2',11,1,1,_binary '',NULL,NULL,NULL,NULL),(3,'Testtest',6,2,2,_binary '',NULL,NULL,NULL,NULL),(4,'TEST5',30,1,1,_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +133,7 @@ CREATE TABLE `obra` (
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +142,7 @@ CREATE TABLE `obra` (
 
 LOCK TABLES `obra` WRITE;
 /*!40000 ALTER TABLE `obra` DISABLE KEYS */;
-INSERT INTO `obra` VALUES (1,'Bogota',_binary '\0',NULL,NULL,NULL,NULL),(2,'Panama',_binary '',NULL,NULL,NULL,NULL),(3,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(4,'Obra nueva',_binary '',NULL,NULL,NULL,NULL);
+INSERT INTO `obra` VALUES (1,'Bogota',_binary '\0',NULL,NULL,NULL,NULL),(2,'Bogota',_binary '',NULL,NULL,NULL,NULL),(3,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(4,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(5,'Obra nueva',_binary '',NULL,NULL,NULL,NULL),(6,'Obra nueva',_binary '',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +185,7 @@ CREATE TABLE `tipoevento` (
   `fechacre` datetime DEFAULT NULL,
   `fechamod` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +194,7 @@ CREATE TABLE `tipoevento` (
 
 LOCK TABLES `tipoevento` WRITE;
 /*!40000 ALTER TABLE `tipoevento` DISABLE KEYS */;
-INSERT INTO `tipoevento` VALUES (1,'Seminario',NULL,NULL,NULL,NULL),(2,'Evangelizacion',NULL,NULL,NULL,NULL);
+INSERT INTO `tipoevento` VALUES (1,'Seminario',NULL,NULL,NULL,NULL),(2,'Evangelizacion',NULL,NULL,NULL,NULL),(3,'Semirario',NULL,NULL,NULL,NULL),(4,'Test',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tipoevento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +250,7 @@ CREATE TABLE `usuario` (
   KEY `obra_idx` (`idobra`),
   CONSTRAINT `obra` FOREIGN KEY (`idobra`) REFERENCES `obra` (`id`),
   CONSTRAINT `rol` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +259,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Tomas1','tcampo','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,1,NULL,NULL,NULL,NULL,_binary ''),(2,'Sandra','san','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,2,NULL,NULL,NULL,NULL,_binary ''),(3,'test','test3','test',1,1,NULL,NULL,NULL,NULL,_binary '');
+INSERT INTO `usuario` VALUES (1,'Tomas1','tcampo','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1,1,NULL,NULL,NULL,NULL,_binary ''),(2,'Sandra','san','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',2,2,NULL,NULL,NULL,NULL,_binary ''),(3,'test','test3','test',1,1,NULL,NULL,NULL,NULL,_binary ''),(4,'Sandra1','test','test',1,1,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -273,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-06 23:22:00
+-- Dump completed on 2024-06-13 22:09:40

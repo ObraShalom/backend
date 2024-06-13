@@ -11,5 +11,7 @@ namespace ObraShalom.Service.Interfaces
     {
         Task<IEnumerable<GrupoEntity>> ObtenerGrupos();
         Task<IEnumerable<GrupoEntity>> ObtenerGrupos(int tipo, int obra);
+        Task CrearGrupo(GrupoEntity obra);
+        Task ActualizarGrupo(int id, GrupoEntity obra);
     }
 }
